@@ -1,0 +1,22 @@
+Programm: Password Generator(password.py)
+
+Format: Given -> When -> Then
+
+Happy Path: Ņemot vērā, ka pirmais līmenis sastāv tikai no cipariem, pieprasot pirmā līmeņa paroli ar 6 rakstzīmēm, mēs saņemam 230856
+Happy Path: Tiek dots, ka pēc vienas paroles pierakstīšanas to var parādīt vēsturē, noklikšķinot uz jaunāko iegūto paroļu vēstures funkcijas level:1  Chars count:6  Password:230856
+
+Use Case: Ņemot vērā, ka maksimālais rakstzīmju skaits ir 25, norādot paroles garumu 25, mēs saņemam Your password: 9444362817552178918275864
+Use Case: Ņemot vērā, ka minimālais paroles rakstzīmju skaits ir 4, iestatot paroles vērtību uz 4, mēs saņemam Your password: 0094
+Use Case: Ņemot vērā, ka trešais līmenis apvieno visus simbolus, ciparus un speciālās rakstzīmes, ieejot 3. līmenī, mēs iegūstam Your password: jjh0j5?c367b-930?a43
+Use Case: Ņemot vērā, ka 4. funkcijā mēs skatāmies uz veco paroļu vēsturi, ievadot 4 kā funkciju - Your password History:
+
+Level: 1
+Chars count: 5
+Password: 38615
+=========
+... un ta talak
+
+Edge Case: Ņemot vērā, ka mēs varam pārvaldīt tikai 6 funkcijas, ievadot skaitli 7, mēs iegūstam Please enter valid level(1-3)
+Edge Case: Ņemot vērā, ka maksimālā paroles vērtība ir 25, ievadiet 26 Please enter valid level(1-3)
+Edge Case: Ņemot vērā, ka mēs varam ievadīt paroles garumu no 4 līdz 25, ievadot burtu "a" mēs iegūstam Error!
+Edge Case: Ir dots, ka mēs varam ievadīt funkcijas no 1-6, ieviešot funkciju - četri, mēs iegūstam Error!

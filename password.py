@@ -25,8 +25,13 @@ special_chars = ["*","-",".","?"]
 def generate_password(chars):
     password = ""
     print("Numbers count in your password(4-25)")
-    count_numbers = int(input())
+    try:
+        count_numbers = int(input())
+    except:
+        print("Error!")
+        return 0
 #Проверка, чтобы пароль был в диапозоне от 4 до 25 символов
+    
     if count_numbers >= 4 and count_numbers <= 25:
 #Генерируем пароль по одному символу count_numbers кол-во раз и берем символы из chars
         for i in range(count_numbers):
@@ -54,7 +59,11 @@ while True:
     print("4.Show password history in sql format(old history)")
     print("5.Show password history in json format(new history)")
     print("6.Exit")
-    level = int(input())
+    try:
+        level = int(input())
+    except:
+        print("Error!")
+        break
 #В зависимости от команды запускаем функцию с разными символами    
     if level == 1:
         generate_password(numbers)
