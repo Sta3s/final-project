@@ -1,7 +1,15 @@
 from rich import print
 import random
 import sqlite3
-
+import json
+# Открываем json фай
+history = []
+try:
+    with open('password_history.json', 'r') as f:
+        history = json.load(f)
+except FileNotFoundError:
+    print("Library file not found. Starting with an empty library.")
+    
 conn = sqlite3.connect('history_sql.db') 
 cursor = conn.cursor() 
 table ="""CREATE TABLE IF NOT EXISTS history (LEVEL CHAR,COUNT CHAR,PASSW TEXT);"""
@@ -11,7 +19,7 @@ cursor.execute(table)
 print("[italic red]-----PASSWORD GENERATOR-----[/italic red]")
 numbers = [1,2,3,4,5,6,7,8,9,0]
 chars = ["a","b","c","d","e","f","g","h","j"]
-special_chars = ["*","-",".","?","!"]
+special_chars = ["*","-",".","?"]
 
 
 def generate_password(chars):
@@ -26,6 +34,15 @@ def generate_password(chars):
         print("Your password: [italic red]"+password+"[/italic red]")
 
         cursor.execute("insert into history (LEVEL, COUNT, PASSW) values (?, ?, ?)",(level, count_numbers, password))
+
+        new_password = {
+        "pass_level": level,
+        "pass_count": count_numbers,
+        "passw": password
+        }
+
+        history.append(new_password)
+
         password = ""
 
 
@@ -34,8 +51,9 @@ while True:
     print("1.Create password 1 level (only numbers)")
     print("2.Create password 2 level (numbers and chars)")
     print("3.Create password 3 level (numbers, chars and special chars)")
-    print("4.Show password history in sql format")
-    print("5.Exit")
+    print("4.Show password history in sql format(old history)")
+    print("5.Show password history in json format(new history)")
+    print("6.Exit")
     level = int(input())
 #В зависимости от команды запускаем функцию с разными символами    
     if level == 1:
@@ -60,7 +78,12 @@ while True:
             print("=========")
         conn.commit() 
         conn.close()
-    elif level == 5:
+    if level == 5:
+#Показываем историю паролей через JSON и так же используем цикл для всех паролей
+        for i in history:
+            print("level:"+str(i['pass_level'])+"  Chars count:"+str(i['pass_count'])+"  Password:"+i["passw"])
+
+    elif level == 6:
         break
 
     else:
